@@ -80,5 +80,5 @@ go test ./govid/tests
 ```
 
 ## Credits
-Thanks to @WaifuShork for helping me on this project
+Thanks to https://github.com/WaifuShork for helping me on this project
 This project uses the Covid-19 API by Javier Aviles. You can find it here: https://github.com/javieraviles/covidAPI
