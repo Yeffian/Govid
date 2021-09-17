@@ -2,7 +2,6 @@ package tests
 
 import (
 	"Govid/govid"
-	_ "Govid/govid"
 	"testing"
 )
 
