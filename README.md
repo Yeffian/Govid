@@ -66,3 +66,19 @@ func main() {
 	fmt.Printf("%+v", data)
 }
 ```
+
+## Building from source
+
+First, clone the repo:
+```bash
+git clone https://github.com/YeffyCodeGit/Govid
+```
+
+Run the unit tests:
+```bash
+go test ./govid/tests
+```
+
+## Credits
+Thanks to @WaifuShork for helping me on this project
+This project uses the Covid-19 API by Javier Aviles. You can find it here: https://github.com/javieraviles/covidAPI
