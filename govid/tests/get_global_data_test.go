@@ -1,8 +1,8 @@
 package tests
 
 import (
+	"github.com/YeffyCodeGit/Govid/govid"
 	"testing"
-	"Govid/govid"
 )
 
 func TestGetGlobalData(t *testing.T) {

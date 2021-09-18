@@ -1,7 +1,7 @@
 package tests
 
 import (
-	"Govid/govid"
+	"github.com/YeffyCodeGit/Govid/govid"
 	"testing"
 )
 

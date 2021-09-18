@@ -1,4 +1,4 @@
-module Govid
+module github.com/YeffyCodeGit/Govid
 
 go 1.16
 
