@@ -86,6 +86,12 @@ func main() {
 }
 ```
 
+## Installing the package
+
+```bash
+go get github.com/YeffyCodeGit/Govid
+```
+
 ## Building from source
 
 First, clone the repo:
