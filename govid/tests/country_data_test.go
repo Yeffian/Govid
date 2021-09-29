@@ -27,3 +27,15 @@ func TestGetAllCountriesData(t *testing.T) {
 		t.Fatalf("invalid data")
 	}
 }
+
+func TestGetGlobalDataByLimit(t *testing.T) {
+	output, err := govid.GetCountryDataByLimit(2)
+
+	if err != nil {
+		t.Fatalf("error getting global data by limit %+v", err)
+	}
+
+	if output[0].Country != "World" && output[2].Country == "India" {
+		t.Fatalf("invalid data")
+	}
+}

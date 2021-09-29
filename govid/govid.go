@@ -93,3 +93,11 @@ func GetAllCountriesData() ([]CountryData, error) {
 
 	return data, err
 }
+
+func GetCountryDataByLimit(limit int) ([]CountryData, error) {
+	arr, err := GetAllCountriesData()
+
+	if err != nil { return nil, err }
+
+	return arr[0:limit], nil
+}

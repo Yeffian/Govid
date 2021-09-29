@@ -10,7 +10,7 @@ A simple Go library which lets you get information on Covid-19
 package main
 
 import (
-	"Govid/govid"
+	"github.com/YeffyCodeGit/Govid/govid"
 	"fmt"
 )
 
@@ -31,7 +31,7 @@ func main() {
 package main
 
 import (
-	"Govid/govid"
+	"github.com/YeffyCodeGit/Govid/govid"
 	"fmt"
 )
 
@@ -46,13 +46,13 @@ func main() {
 }
 ```
 
-## Getting data about all the countries in the library
+### Getting data about all the countries in the library
 
 ```go
 package main
 
 import (
-	"Govid/govid"
+	"github.com/YeffyCodeGit/Govid/govid"
 	"fmt"
 )
 
@@ -63,6 +63,25 @@ func main() {
 		panic(err)
 	}
 
+	fmt.Printf("%+v", data)
+}
+```
+
+### Getting data about a specific amount of countries
+
+```go
+package main
+
+import (
+    "github.com/YeffyCodeGit/Govid/govid"
+    "fmt"
+)
+
+func main() {
+	data, err := govid.GetCountryDataByLimit(2)
+	
+	if err != nil { panic(err) }
+	
 	fmt.Printf("%+v", data)
 }
 ```
