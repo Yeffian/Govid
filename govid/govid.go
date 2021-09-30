@@ -97,8 +97,8 @@ func GetAllCountriesData() ([]CountryData, error) {
 	return data, err
 }
 
-// The same as GetAllCountriesData, but allows you to explicitly specify a limit on how much
-// to get up there
+// The same as GetAllCountriesData, but allows you to explicitly specify a limit on many elements
+// to get.
 // Params:
 //    limit int
 // Returns:
@@ -112,7 +112,12 @@ func GetCountriesDataByLimit(limit int) ([]CountryData, error) {
 }
 
 
-
+// Similar to GetCountriesDataByLimit, but lets you specify a start and end limit for more control.
+// Params:
+//    endLimit int
+//    startLimit int
+// Returns:
+//   ([]CountryData, error)
 func GetCountriesDataByEndLimit(endLimit int, startLimit int) ([]CountryData, error) {
 	arr, err := GetAllCountriesData()
 

@@ -29,7 +29,7 @@ func TestGetAllCountriesData(t *testing.T) {
 }
 
 func TestGetGlobalDataByLimit(t *testing.T) {
-	output, err := govid.GetCountryDataByLimit(2)
+	output, err := govid.GetCountriesDataByLimit(2)
 
 	if err != nil {
 		t.Fatalf("error getting global data by limit %+v", err)
@@ -41,7 +41,7 @@ func TestGetGlobalDataByLimit(t *testing.T) {
 }
 
 func TestGetGlobalDatatByEndLimit(t *testing.T) {
-	output, err := govid.GetCountryDataByEndLimit(3, 1)
+	output, err := govid.GetCountriesDataByEndLimit(3, 1)
 
 	if err != nil { t.Fatalf("error getting global data by end and start limit %+v", err) }
 
