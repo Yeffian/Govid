@@ -29,13 +29,23 @@ func TestGetAllCountriesData(t *testing.T) {
 }
 
 func TestGetGlobalDataByLimit(t *testing.T) {
-	output, err := govid.GetCountryDataByLimit(2)
+	output, err := govid.GetCountriesDataByLimit(2)
 
 	if err != nil {
 		t.Fatalf("error getting global data by limit %+v", err)
 	}
 
 	if output[0].Country != "World" && output[2].Country == "India" {
+		t.Fatalf("invalid data")
+	}
+}
+
+func TestGetGlobalDatatByEndLimit(t *testing.T) {
+	output, err := govid.GetCountriesDataByEndLimit(3, 1)
+
+	if err != nil { t.Fatalf("error getting global data by end and start limit %+v", err) }
+
+	if output[0].Country != "USA" && output[3].Country == "Brazil" {
 		t.Fatalf("invalid data")
 	}
 }
