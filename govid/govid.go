@@ -110,3 +110,11 @@ func GetCountryDataByLimit(limit int) ([]CountryData, error) {
 
 	return arr[0:limit], nil
 }
+
+func GetCountryDataByEndLimit(endLimit int, startLimit int) ([]CountryData, error) {
+	arr, err := GetAllCountriesData()
+
+	if err != nil { return nil, err }
+
+	return arr[startLimit:endLimit], nil
+}

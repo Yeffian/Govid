@@ -39,3 +39,13 @@ func TestGetGlobalDataByLimit(t *testing.T) {
 		t.Fatalf("invalid data")
 	}
 }
+
+func TestGetGlobalDatatByEndLimit(t *testing.T) {
+	output, err := govid.GetCountryDataByEndLimit(3, 1)
+
+	if err != nil { t.Fatalf("error getting global data by end and start limit %+v", err) }
+
+	if output[0].Country != "USA" && output[3].Country == "Brazil" {
+		t.Fatalf("invalid data")
+	}
+}
