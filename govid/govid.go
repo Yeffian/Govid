@@ -103,7 +103,7 @@ func GetAllCountriesData() ([]CountryData, error) {
 //    limit int
 // Returns:
 //    ([]CountryData, error)
-func GetCountryDataByLimit(limit int) ([]CountryData, error) {
+func GetCountriesDataByLimit(limit int) ([]CountryData, error) {
 	arr, err := GetAllCountriesData()
 
 	if err != nil { return nil, err }
@@ -111,7 +111,9 @@ func GetCountryDataByLimit(limit int) ([]CountryData, error) {
 	return arr[0:limit], nil
 }
 
-func GetCountryDataByEndLimit(endLimit int, startLimit int) ([]CountryData, error) {
+
+
+func GetCountriesDataByEndLimit(endLimit int, startLimit int) ([]CountryData, error) {
 	arr, err := GetAllCountriesData()
 
 	if err != nil { return nil, err }
