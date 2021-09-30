@@ -69,6 +69,9 @@ func GetCountryData(country string) (*CountryData, error) {
 	return &data, err
 }
 
+// Gets a list which contains all the data about every available country
+// Returns:
+//  ([]CountryData, error)
 func GetAllCountriesData() ([]CountryData, error) {
 	res, err := http.Get(AllCountriesEndpoint)
 
@@ -94,6 +97,12 @@ func GetAllCountriesData() ([]CountryData, error) {
 	return data, err
 }
 
+// The same as GetAllCountriesData, but allows you to explicitly specify a limit on how much
+// to get up there
+// Params:
+//    limit int
+// Returns:
+//    ([]CountryData, error)
 func GetCountryDataByLimit(limit int) ([]CountryData, error) {
 	arr, err := GetAllCountriesData()
 
