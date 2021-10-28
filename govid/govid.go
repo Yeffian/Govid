@@ -2,40 +2,49 @@ package govid
 
 import (
 	"encoding/json"
-	"io/ioutil"
-	"net/http"
+
+	"github.com/valyala/fasthttp"
 )
 
 // The different endpoints of the API
 const (
-	AllDataEndpoint = "https://coronavirus-19-api.herokuapp.com/all"
+	AllDataEndpoint      = "https://coronavirus-19-api.herokuapp.com/all"
 	AllCountriesEndpoint = "https://coronavirus-19-api.herokuapp.com/countries"
-	CountryDataEndpoint = "https://coronavirus-19-api.herokuapp.com/countries/"
+	CountryDataEndpoint  = "https://coronavirus-19-api.herokuapp.com/countries/"
 )
 
 // Gets data about the global cases, recoveries and deaths
 // Returns:
 //   (*GlobalData, error)
 func GetGlobalData() (*GlobalData, error) {
-	res, err := http.Get(AllDataEndpoint)
+	// Create the request
+	req := fasthttp.AcquireRequest()
+	req.SetRequestURI(AllDataEndpoint)
 
-	// Clean up the request
-	defer func() {
-		if err := res.Body.Close(); err != nil {
-			panic(err)
-		}
-	}()
+	resp := fasthttp.AcquireResponse()
 
-	if err != nil { return nil, err }
+	// Release the request and response
+	defer fasthttp.ReleaseResponse(resp)
+	defer fasthttp.ReleaseRequest(req)
 
-	body, err := ioutil.ReadAll(res.Body)
+	// Do the request
+	err := fasthttp.Do(req, resp)
 
-	if err != nil { return nil, err }
+	if err != nil {
+		return nil, err
+	}
 
+	var body []byte
+
+	body = resp.Body()
+
+	// Deserialize the data
 	var data GlobalData
 	err = json.Unmarshal(body, &data)
 
-	if err != nil { return nil, err }
+	if err != nil {
+		return nil, err
+	}
 
 	return &data, nil
 }
@@ -46,55 +55,72 @@ func GetGlobalData() (*GlobalData, error) {
 // Returns:
 //  (*CountryData, error)
 func GetCountryData(country string) (*CountryData, error) {
-	res, err := http.Get(CountryDataEndpoint + country)
+	// Create the request
+	req := fasthttp.AcquireRequest()
+	req.SetRequestURI(CountryDataEndpoint + country)
 
-	if err != nil { return nil, err }
+	resp := fasthttp.AcquireResponse()
 
-	// Clean up the request
-	defer func() {
-		if err := res.Body.Close(); err != nil {
-			panic(err)
-		}
-	}()
+	// Release the request and response
+	defer fasthttp.ReleaseResponse(resp)
+	defer fasthttp.ReleaseRequest(req)
 
-	body, err := ioutil.ReadAll(res.Body)
+	// Do the request
+	err := fasthttp.Do(req, resp)
 
-	if err != nil { return nil, err }
+	if err != nil {
+		return nil, err
+	}
 
+	var body []byte
+
+	body = resp.Body()
+
+	// Deserialize the data
 	var data CountryData
 	err = json.Unmarshal(body, &data)
 
-	if err != nil { return nil, err }
+	if err != nil {
+		return nil, err
+	}
 
-	return &data, err
+	return &data, nil
 }
 
 // Gets a list which contains all the data about every available country
 // Returns:
 //  ([]CountryData, error)
 func GetAllCountriesData() ([]CountryData, error) {
-	res, err := http.Get(AllCountriesEndpoint)
+	// Create the request
+	req := fasthttp.AcquireRequest()
+	req.SetRequestURI(AllCountriesEndpoint)
 
-	if err != nil { return nil, err }
+	resp := fasthttp.AcquireResponse()
 
-	// Clean up the request
-	defer func() {
-		if err := res.Body.Close(); err != nil {
-			panic(err)
-		}
-	}()
+	// Release the request and response
+	defer fasthttp.ReleaseResponse(resp)
+	defer fasthttp.ReleaseRequest(req)
 
-	body, err := ioutil.ReadAll(res.Body)
+	// Do the request
+	err := fasthttp.Do(req, resp)
 
-	if err != nil { return nil, err }
+	if err != nil {
+		return nil, err
+	}
 
+	var body []byte
+
+	body = resp.Body()
+
+	// Deserialize the data
 	var data []CountryData
-
 	err = json.Unmarshal(body, &data)
 
-	if err != nil { return nil, err }
+	if err != nil {
+		return nil, err
+	}
 
-	return data, err
+	return data, nil
 }
 
 // The same as GetAllCountriesData, but allows you to explicitly specify a limit on many elements
@@ -106,11 +132,12 @@ func GetAllCountriesData() ([]CountryData, error) {
 func GetCountriesDataByLimit(limit int) ([]CountryData, error) {
 	arr, err := GetAllCountriesData()
 
-	if err != nil { return nil, err }
+	if err != nil {
+		return nil, err
+	}
 
 	return arr[0:limit], nil
 }
-
 
 // Similar to GetCountriesDataByLimit, but lets you specify a start and end limit for more control.
 // Params:
@@ -121,7 +148,9 @@ func GetCountriesDataByLimit(limit int) ([]CountryData, error) {
 func GetCountriesDataByEndLimit(endLimit int, startLimit int) ([]CountryData, error) {
 	arr, err := GetAllCountriesData()
 
-	if err != nil { return nil, err }
+	if err != nil {
+		return nil, err
+	}
 
 	return arr[startLimit:endLimit], nil
 }
